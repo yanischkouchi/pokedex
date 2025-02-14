@@ -1,5 +1,5 @@
 const PkmnType = [
-    "Normal", "Feu", "Eau", "Plante", "Électrik", "Glace", 
-    "Combat", "Poison", "Sol", "Vol", "Psy", "Insecte", 
-    "Roche", "Spectre", "Dragon", "Ténèbres", "Acier", "Fée"
+    "NORMAL", "FEU", "EAU", "PLANTE", "ÉLECTRIK", "GLACE", 
+    "COMBAT", "POISON", "SOL", "VOL", "PSY", "INSECTE", 
+    "ROCHE", "SPECTRE", "DRAGON", "TÉNÈBRES", "ACIER", "FÉE"
 ];
