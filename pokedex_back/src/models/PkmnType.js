@@ -3,3 +3,5 @@ const PkmnType = [
     "COMBAT", "POISON", "SOL", "VOL", "PSY", "INSECTE", 
     "ROCHE", "SPECTRE", "DRAGON", "TÉNÈBRES", "ACIER", "FÉE"
 ];
+
+module.exports = PkmnType;

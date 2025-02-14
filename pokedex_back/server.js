@@ -1,8 +1,8 @@
 const express = require('express');
 const app = express();
 const port = 3000;
-const apiRouteur = require('./routes/api')
-const wss = require('./websocketserver')
+const apiRouteur = require('./src/routes/api')
+// const wss = require('./websocketserver')
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
