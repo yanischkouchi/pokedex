@@ -1,6 +1,5 @@
 exports.hasRole = (requiredRole) => {
     return (req, res, next) => {
-        console.log("req.user", req.user);
         if (!req.user) {
             return res.status(401).json({ error: "Unauthorized" });
         } else if (req.user.role !== requiredRole) {
