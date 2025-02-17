@@ -4,6 +4,7 @@ const port = 3000;
 const apiRouteur = require('./src/routes/pkmn')
 const userRouteur = require('./src/routes/user')
 const authRouteur = require('./src/routes/auth')
+const trainerRouteur = require('./src/routes/trainer')
 require('dotenv').config({ path: 'props.env' });
 // const wss = require('./websocketserver')
 
@@ -22,4 +23,4 @@ app.get('/', (req, res) => {
 app.listen(port, () => {
     console.log(`Example app listening on port ${port}`)
 })
-app.use('/api', apiRouteur, userRouteur, authRouteur);
+app.use('/api', apiRouteur, userRouteur, authRouteur, trainerRouteur);

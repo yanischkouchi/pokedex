@@ -22,7 +22,7 @@ exports.login = async (req, res) => {
         const { email, password } = req.body;
         const user = await UserModel.findOne({ email }).select('+password');
         if (!user) {
-            throw new Error("User/password not find")
+            throw new Error("User/password not fond")
         }
         const uservice = new UserService;
         const isPasswordValid = await uservice.verifyPassword(password, user.password);
@@ -30,11 +30,11 @@ exports.login = async (req, res) => {
             return res.status(401).json({ error: "Email/Mot de passe incorrect." });
         }
         const myToken = jwt.sign(
-            { id: user._id, email: user.email, role: user.role },
+            { id: user._id, firstName: user.firstName, email: user.email, role: user.role },
             process.env.TOKEN_SECRET,
             { expiresIn : '2h'}
         );
-        res.status(200).json({ id: user._id, token: myToken, role: user.role });
+        res.status(200).json({ id: user._id, firstName: user.firstName, token: myToken, role: user.role });
     
     } catch (err) {
         console.log("erreur : ", err);
