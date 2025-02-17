@@ -8,9 +8,20 @@ let validateEmail = function(email) {
 
 const userSchema = new mongoose.Schema({
     firstName: String,
-    lastName: { type: String, minlength: [2, "lastName must have minimum 2 characters"], maxlength: [40, "lastName must have maximum 40 characters"] },
-    email: {type: String, required: true, unique: true, validate: [validateEmail, 'invalid email address']},
-    password: String
+    lastName: { type: String, 
+                minlength: [2, "lastName must have minimum 2 characters"], 
+                maxlength: [40, "lastName must have maximum 40 characters"] },
+    email: { type: String, 
+             required: true, 
+             unique: true, 
+             validate: [validateEmail, 'invalid email address']},
+    password: String,
+    role: { 
+        type: String, 
+        enum: ["ADMIN", "USER"],
+        default: "USER",
+        immutable: true // permet d'empêcher toute modification via une requête API
+    }
 })
 
 userSchema.pre('save',function(next){

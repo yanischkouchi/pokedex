@@ -19,9 +19,9 @@ exports.GetUserByIdOrEmail = async (req, res) => {
     const uservice = new UserService;
     try {
         const { idOrEmail } = req.params;
-        console.log("req.auth.email : ", req.auth.email)
+        console.log("req.user.email : ", req.user.email)
         console.log("idOrEmail : ", idOrEmail)
-        if (req.auth.id !== idOrEmail && req.auth.email !== idOrEmail) {
+        if (req.user.id !== idOrEmail && req.user.email !== idOrEmail) {
             return res.status(403).json({ error: "Access denied" });
         }
 

@@ -9,6 +9,7 @@ exports.register = async (req, res) => {
     try {
         let hash = await bcrypt.hash(userData.password, 10)
         userData.password = hash;      
+        userData.role = "USER";
         user = await UserModel.create(userData);
         res.status(200).json({ message: "User created with success !" });
     } catch (err) {
@@ -29,11 +30,11 @@ exports.login = async (req, res) => {
             return res.status(401).json({ error: "Email/Mot de passe incorrect." });
         }
         const myToken = jwt.sign(
-            { id: user._id, email: user.email },
+            { id: user._id, email: user.email, role: user.role },
             process.env.TOKEN_SECRET,
             { expiresIn : '2h'}
         );
-        res.status(200).json({ id: user._id, token: myToken });
+        res.status(200).json({ id: user._id, token: myToken, role: user.role });
     
     } catch (err) {
         console.log("erreur : ", err);
