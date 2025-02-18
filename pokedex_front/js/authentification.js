@@ -1,30 +1,26 @@
-// Sélectionner les éléments
 const loginButton = document.getElementById('loginButton');
 const modal = document.getElementById('loginModal');
 const closeModal = document.getElementById('closeModal');
 const loginForm = document.getElementById('loginForm');
 const errorAuth = document.getElementById('errorAuth');
 
-// Afficher la fenêtre modale lorsque le bouton "Se connecter" est cliqué
 loginButton.addEventListener('click', () => {
     modal.style.display = 'block';
 });
 
-// Fermer la fenêtre modale lorsque l'utilisateur clique sur le bouton de fermeture (×)
 closeModal.addEventListener('click', () => {
     modal.style.display = 'none';
 });
 
-// Fermer la fenêtre modale lorsque l'utilisateur clique en dehors de la fenêtre modale
+// fermer la fenêtre modale lorsque l'utilisateur clique en dehors
 window.addEventListener('click', (event) => {
     if (event.target === modal) {
         modal.style.display = 'none';
     }
 });
 
-// Gestion du formulaire de connexion
 loginForm.addEventListener('submit', async function(event) {
-    event.preventDefault(); // Empêche la soumission par défaut
+    event.preventDefault(); // empêcher la soumission par défaut
 
     const email = document.getElementById('email').value;
     const password = document.getElementById('password').value;
@@ -44,19 +40,14 @@ loginForm.addEventListener('submit', async function(event) {
 
         const data = await response.json();
 
-        // Si la connexion est réussie, on peut stocker le token
         localStorage.setItem('authToken', data.token);
 
-        // Message de succès
         alert('Connexion réussie !');
 
-        // Fermer la modale
         modal.style.display = 'none';
 
-        // Rediriger ou mettre à jour l'interface
-        // window.location.href = '/dashboard'; // Exemple pour rediriger
+        // window.location.href = '/dashboard'; // exemple pour rediriger après connexion
     } catch (error) {
-        // Afficher l'erreur dans la modale
         errorAuth.textContent = error.message;
     }
 });

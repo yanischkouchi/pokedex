@@ -3,17 +3,15 @@ const searchButton = document.getElementById('searchButton');
 const pokemonSearchInput = document.getElementById('pokemonSearch');
 const errorSearch = document.getElementById('errorSearch');
 
-// Connexion au WebSocket
 const ws = new WebSocket(`ws://localhost:8181`);
 
 ws.onopen = () => {
     console.log("Connexion réussie");
 };
 
-// Fonction pour récupérer un Pokémon par son nom
 async function fetchPokemonByName(name) {
     try {
-        const formattedName = name.charAt(0).toUpperCase() + name.slice(1).toLowerCase(); // Formater le nom du Pokémon
+        const formattedName = name.charAt(0).toUpperCase() + name.slice(1).toLowerCase();
         const response = await fetch(`http://localhost:3000/api/pkmn?name=${formattedName}`);
 
         if (!response.ok) {
@@ -23,13 +21,12 @@ async function fetchPokemonByName(name) {
         const pokemon = await response.json();
         displayPokemon(pokemon);
     } catch (error) {
-        errorSearch.textContent = error.message; // Afficher l'erreur
+        errorSearch.textContent = error.message;
     }
 }
 
-// Fonction pour afficher un Pokémon
 function displayPokemon(pokemon) {
-    pokemonListDiv.innerHTML = ''; // Réinitialiser la liste des Pokémon
+    pokemonListDiv.innerHTML = ''; // réinitialiser la liste des Pokémon
 
     const pokemonElement = document.createElement('div');
     pokemonElement.classList.add('pokemon');
@@ -41,12 +38,11 @@ function displayPokemon(pokemon) {
     pokemonListDiv.appendChild(pokemonElement);
 }
 
-// Gestion de la recherche via le bouton
 searchButton.addEventListener('click', () => {
     const pokemonName = pokemonSearchInput.value.trim();
     if (pokemonName) {
         fetchPokemonByName(pokemonName);
-        errorSearch.textContent = ''; // Réinitialiser le message d'erreur
+        errorSearch.textContent = ''; // réinitialiser le message d'erreur
     } else {
         errorSearch.textContent = 'Veuillez entrer un nom de Pokémon.';
     }
