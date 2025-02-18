@@ -19,14 +19,19 @@
                 <input type="password" id="password" name="password" required>
                 <button type="submit">Se connecter</button>
             </form>
-            <div id="errorMessage" style="color: red;"></div>
+            <div id="errorAuth" style="color: red;"></div>
         </div>
     </div>
 
     <h1>Rechercher un Pokémon</h1>
-    <input type="text" id="pokemonSearch" placeholder="Rechercher un Pokémon..." />
-    <button id="searchButton">Rechercher</button>
-    <div id="pokemonList"></div>    
+    <div class="search-container">
+        <input type="text" id="pokemonSearch" placeholder="Rechercher un Pokémon" />
+        <button id="searchButton">Rechercher</button>
+        <div id="errorSearch" style="color: red;"></div>
+    </div>
+
+    <div id="pokemonList" class="pokemon-list"></div>
+    
     <script src="main.js"></script>
     <script src="authentification.js"></script>
 </body>

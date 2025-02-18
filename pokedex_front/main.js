@@ -1,6 +1,7 @@
 const pokemonListDiv = document.getElementById('pokemonList');
-const pokemonSearchInput = document.getElementById('pokemonSearch');
 const searchButton = document.getElementById('searchButton');
+const pokemonSearchInput = document.getElementById('pokemonSearch');
+const errorSearch = document.getElementById('errorSearch');
 
 // Connexion au WebSocket
 const ws = new WebSocket(`ws://localhost:8181`);
@@ -9,44 +10,44 @@ ws.onopen = () => {
     console.log("Connexion réussie");
 };
 
-async function fetchPokemonByName(pokemonName) {
+// Fonction pour récupérer un Pokémon par son nom
+async function fetchPokemonByName(name) {
     try {
-        // mettre la 1e lettre en maj et le reste en min
-        const formattedName = pokemonName.charAt(0).toUpperCase() + pokemonName.slice(1).toLowerCase();
-
+        const formattedName = name.charAt(0).toUpperCase() + name.slice(1).toLowerCase(); // Formater le nom du Pokémon
         const response = await fetch(`http://localhost:3000/api/pkmn?name=${formattedName}`);
+
         if (!response.ok) {
-            throw new Error('Pokémon pas connu ou pas enregistré');
+            throw new Error('Pokémon non trouvé');
         }
+
         const pokemon = await response.json();
         displayPokemon(pokemon);
     } catch (error) {
-        console.error('Erreur:', error);
+        errorSearch.textContent = error.message; // Afficher l'erreur
     }
 }
 
-// afficher un seul Pokémon
+// Fonction pour afficher un Pokémon
 function displayPokemon(pokemon) {
-    pokemonListDiv.innerHTML = ''; // réinitialiser la liste avant d'afficher le Pokémon
+    pokemonListDiv.innerHTML = ''; // Réinitialiser la liste des Pokémon
 
     const pokemonElement = document.createElement('div');
     pokemonElement.classList.add('pokemon');
     pokemonElement.innerHTML = `
         <img src="${pokemon.imgUrl}" alt="${pokemon.name}" />
         <h3>${pokemon.name}</h3>
-        <p>Types: ${pokemon.types.join(', ')}</p>
+        <p>Type(s): ${pokemon.types.join(', ')}</p>
     `;
     pokemonListDiv.appendChild(pokemonElement);
 }
 
-// btn rechercher pokémon
+// Gestion de la recherche via le bouton
 searchButton.addEventListener('click', () => {
-    const searchTerm = pokemonSearchInput.value.trim();
-    if (searchTerm) {
-        // si un texte est saisi, rechercher le Pokémon par son nom
-        fetchPokemonByName(searchTerm);
+    const pokemonName = pokemonSearchInput.value.trim();
+    if (pokemonName) {
+        fetchPokemonByName(pokemonName);
+        errorSearch.textContent = ''; // Réinitialiser le message d'erreur
     } else {
-        // si le champ de recherche est vide, afficher un message ou réinitialiser la liste
-        pokemonListDiv.innerHTML = '<p>Veuillez entrer un nom de Pokémon pour effectuer la recherche.</p>';
+        errorSearch.textContent = 'Veuillez entrer un nom de Pokémon.';
     }
 });

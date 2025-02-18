@@ -3,7 +3,7 @@ const loginButton = document.getElementById('loginButton');
 const modal = document.getElementById('loginModal');
 const closeModal = document.getElementById('closeModal');
 const loginForm = document.getElementById('loginForm');
-const errorMessageDiv = document.getElementById('errorMessage');
+const errorAuth = document.getElementById('errorAuth');
 
 // Afficher la fenêtre modale lorsque le bouton "Se connecter" est cliqué
 loginButton.addEventListener('click', () => {
@@ -57,6 +57,6 @@ loginForm.addEventListener('submit', async function(event) {
         // window.location.href = '/dashboard'; // Exemple pour rediriger
     } catch (error) {
         // Afficher l'erreur dans la modale
-        errorMessageDiv.textContent = error.message;
+        errorAuth.textContent = error.message;
     }
 });

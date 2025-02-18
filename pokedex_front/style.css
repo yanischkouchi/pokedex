@@ -1,3 +1,4 @@
+/*                      FENETRE CONNEXION                      */
 /* Fenêtre modale */
 .modal {
     display: none; /* Masquée par défaut */
@@ -35,4 +36,78 @@
     color: black;
     text-decoration: none;
     cursor: pointer;
+}
+
+/*                    AFFICHAGE POKEMON                      */
+.search-container {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+#pokemonSearch {
+    padding: 10px;
+    font-size: 16px;
+    width: 250px;
+    margin-right: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+#searchButton {
+    padding: 10px;
+    font-size: 16px;
+    background-color: #28a745;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#searchButton:hover {
+    background-color: #218838;
+}
+
+/* Liste des Pokémon */
+.pokemon-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 20px;
+    justify-items: center;
+    padding: 20px;
+}
+
+/* Carte de chaque Pokémon */
+.pokemon {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 15px;
+    width: 180px;
+    text-align: center;
+    background-color: #f9f9f9;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.pokemon img {
+    width: 100px; /* Taille réduite de l'image */
+    height: 100px;
+    object-fit: cover;
+    margin-bottom: 10px;
+}
+
+.pokemon h3 {
+    font-size: 18px;
+    color: #333;
+}
+
+.pokemon p {
+    font-size: 14px;
+    color: #777;
+}
+
+/* Message d'erreur */
+#errorMessage {
+    color: red;
+    font-size: 16px;
+    text-align: center;
 }
