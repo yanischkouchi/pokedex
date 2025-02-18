@@ -1,4 +1,6 @@
 const TrainerService = require('../services/trainer.service');
+const Pkmn = require('../models/pkmn.model');
+const Trainer = require('../models/trainer.model');
 
 exports.createTrainer = async (req, res) => {
     console.log("req.user : ", req.user)
@@ -49,5 +51,40 @@ exports.deleteTrainer = async (req, res) => {
         res.status(204).send();
     } catch (err) {
         res.status(400).json({ error: err.message });
+    }
+};
+
+exports.markPokemon = async (req, res) => {
+    const { isCaptured, pokemonId } = req.body;
+    
+    try {
+        const user = req.user;
+        const pokemon = await Pkmn.findById(pokemonId);
+        if (!pokemon) {
+            return res.status(404).json({ error: "Pokémon not found" });
+        }
+
+        const trainer = await Trainer.findOne({ username: user.firstName });
+
+        if (!trainer) {
+            return res.status(404).json({ error: "Trainer not found" });
+        }
+
+        // ajout du Pokémon dans la liste appropriée
+        if (isCaptured) {
+            if (!trainer.pkmnCatch.includes(pokemonId)) {
+                trainer.pkmnCatch.push(pokemonId);
+            }
+        } else {
+            if (!trainer.pkmnSeen.includes(pokemonId)) {
+                trainer.pkmnSeen.push(pokemonId);
+            }
+        }
+
+        await trainer.save();
+
+        res.json(trainer);
+    } catch (err) {
+        res.status(500).json({ error: "An error occurred" });
     }
 };

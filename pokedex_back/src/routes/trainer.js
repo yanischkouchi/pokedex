@@ -7,5 +7,6 @@ router.post('/trainer', authMiddleware, trainerController.createTrainer);
 router.get('/trainer', authMiddleware, trainerController.getTrainer);
 router.put('/trainer', authMiddleware, trainerController.updateTrainer);
 router.delete('/trainer', authMiddleware, trainerController.deleteTrainer);
+router.post('/trainer/mark', authMiddleware, trainerController.markPokemon);
 
 module.exports = router;
