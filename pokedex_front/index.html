@@ -3,11 +3,31 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
     <title>Pokedex</title>
 </head>
 <body>
-    <h1>Liste des Pokémon</h1>
-    <div id="pokemonList"></div>
+    <button id="loginButton">Se connecter</button>
+    <div id="loginModal" class="modal">
+        <div class="modal-content">
+            <span id="closeModal" class="close">&times;</span>
+            <h2>Se connecter</h2>
+            <form id="loginForm">
+                <label for="email">Email :</label>
+                <input type="email" id="email" name="email" required>
+                <label for="password">Mot de passe :</label>
+                <input type="password" id="password" name="password" required>
+                <button type="submit">Se connecter</button>
+            </form>
+            <div id="errorMessage" style="color: red;"></div>
+        </div>
+    </div>
+
+    <h1>Rechercher un Pokémon</h1>
+    <input type="text" id="pokemonSearch" placeholder="Rechercher un Pokémon..." />
+    <button id="searchButton">Rechercher</button>
+    <div id="pokemonList"></div>    
     <script src="main.js"></script>
+    <script src="authentification.js"></script>
 </body>
 </html>
