@@ -6,7 +6,8 @@ const userRouteur = require('./src/routes/user')
 const authRouteur = require('./src/routes/auth')
 const trainerRouteur = require('./src/routes/trainer')
 require('dotenv').config({ path: 'props.env' });
-// const wss = require('./websocketserver')
+const wss = require('./websocketserver')
+const cors = require('cors');
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
@@ -23,4 +24,5 @@ app.get('/', (req, res) => {
 app.listen(port, () => {
     console.log(`Example app listening on port ${port}`)
 })
+app.use(cors());
 app.use('/api', apiRouteur, userRouteur, authRouteur, trainerRouteur);
