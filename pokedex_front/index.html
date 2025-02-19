@@ -17,7 +17,7 @@
                 <input type="email" id="email" name="email" required>
                 <label for="password">Mot de passe :</label>
                 <input type="password" id="password" name="password" required>
-                <button type="submit">Se connecter</button>
+                <button type="submit">Connexion</button>
             </form>
             <div id="errorAuth" style="color: red;"></div>
         </div>
@@ -25,12 +25,19 @@
 
     <h1>Rechercher un Pokémon</h1>
     <div class="search-container">
-        <input type="text" id="pokemonSearch" placeholder="Rechercher un Pokémon" />
+        <input type="text" id="pokemonSearch" placeholder="Entrez le nom du Pokémon" />
         <button id="searchButton">Rechercher</button>
+        <button id="getAllButton">Afficher tous les pokémons</button>
         <div id="errorSearch" style="color: red;"></div>
     </div>
 
     <div id="pokemonList" class="pokemon-list"></div>
+
+    <div id="paginationControls">
+        <button id="prevPage" disabled>← Précédent</button>
+        <span id="pageInfo"></span>
+        <button id="nextPage">Suivant →</button>
+    </div>    
     
     <script src="./js/main.js"></script>
     <script src="./js/authentification.js"></script>
