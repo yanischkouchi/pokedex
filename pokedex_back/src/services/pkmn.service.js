@@ -90,6 +90,15 @@ class PkmnService {
         }
     }
 
+    async getAllPkmn() {
+        try {
+            return await Pkmn.find(); // Récupère tous les Pokémon
+        } catch (error) {
+            console.error("Error fetching all Pokémon:", error);
+            throw error;
+        }
+    }    
+
     async deletePkmnById(id) {
         try {
             const result = await PkmnModel.findByIdAndDelete(id);

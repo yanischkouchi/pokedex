@@ -9,18 +9,22 @@ exports.GetPkmnType = (req, res) => {
 exports.createPkmn = async (req, res) => {
     try {
         const { name, types, description, imgUrl } = req.body;
-        console.log("req.body : ", req.body)
-        if (!name || !types || !description || !imgUrl) {
-            return res.status(400).json({ error: "Missing required fields" });
+        console.log("req.body : ", req.body);
+
+        if (!name || !types || !imgUrl) {
+            return res.status(400).json({ error: "Missing required fields", received: req.body });
         }
+
+        // Vérification si types est bien un tableau
+        const formattedTypes = Array.isArray(types) ? types : types.split(',');
+
         const pkmnService = new PkmnService();
         const newPkmn = await pkmnService.createPkmn({ 
             name, 
-            types: types.split(','),
+            types: formattedTypes, // Utilisation du tableau correct
             description,
             imgUrl 
         });
-
         res.status(201).json(newPkmn);
     } catch (err) {
         res.status(500).json({ error: "Failed to create Pokémon", details: err.message });
@@ -91,6 +95,17 @@ exports.getPkmn = async (req, res) => {
     } catch (error) {
         console.error("err:", error);
         res.status(500).json({ error: "An error occurred while fetching the Pokémon" });
+    }
+};
+
+exports.getAllPkmn = async (req, res) => {
+    try {
+        const pkmnService = new PkmnService();
+        const allPkmn = await pkmnService.getAllPkmn();
+        res.status(200).json(allPkmn);
+    } catch (error) {
+        console.error("Error fetching all Pokémon:", error);
+        res.status(500).json({ error: "An error occurred while fetching all Pokémon" });
     }
 };
 

@@ -15,7 +15,6 @@ const pkmnSchema = new mongoose.Schema({
     }],
     description: {
         type: String,
-        required: true,
     },
     regions: [{
         regionName: {
