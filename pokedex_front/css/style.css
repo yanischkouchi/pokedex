@@ -1,6 +1,14 @@
 * {
     box-sizing: border-box;
-    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-family: cursive;
+}
+
+body {
+    background-image: url(../assets/background_pc.jpg);
+    background-size: cover; /* L'image couvre toute la page */
+    background-repeat: no-repeat; /* Empêche la répétition de l'image */
+    background-position: center; /* Centre l'image */
+    background-attachment: fixed; /* Garde l'image fixe au défilement */
 }
 
 h1 {
@@ -13,6 +21,32 @@ h2 {
 }
 
 /*                      FENETRE CONNEXION                      */
+
+#loginButton {
+    background: #fbca1f;
+    font-family: inherit;
+    padding: 0.6em 1.3em;
+    font-weight: 900;
+    font-size: 2vh;
+    border: 3px solid black;
+    border-radius: 0.4em;
+    box-shadow: 0.1em 0.1em;
+    cursor: pointer;
+    margin: 1vh;
+    justify-self: center;
+
+}
+
+#loginButton:hover {
+transform: translate(-0.05em, -0.05em);
+box-shadow: 0.15em 0.15em;
+}
+
+#loginButton:active {
+transform: translate(0.05em, 0.05em);
+box-shadow: 0.05em 0.05em;
+}
+
 /* Fenêtre modale */
 .modal {
     display: none;
@@ -168,12 +202,19 @@ box-shadow: 0.05em 0.05em;
     text-align: center;
     background-color: #f9f9f9;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    opacity: 97%;
+}
+
+.pokemon:hover {
+    opacity: 100%;
+    transform: scale(1.04);
 }
 
 .pokemon img {
     width: 100px; /* Taille réduite de l'image */
     height: 100px;
     object-fit: cover;
+    opacity: 100%;
     margin-bottom: 10px;
 }
 
@@ -210,10 +251,6 @@ box-shadow: 0.05em 0.05em;
     cursor: not-allowed;
 }
 
-
-/* Message d'erreur */
-#errorMessage {
-    color: red;
-    font-size: 16px;
-    text-align: center;
+.error {
+    color: rgb(193, 0, 0);
 }
