@@ -4,7 +4,7 @@ const bcrypt = require('bcrypt');
 
 exports.createUser = async (req, res) => {
     let user;
-    let userData = structuredClone(req.body); // Pour éviter de modifier le body
+    let userData = structuredClone(req.body); // pour éviter de modifier le body
     try {
         let hash = await bcrypt.hash(userData.password, 10)
         userData.password = hash;      

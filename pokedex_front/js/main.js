@@ -9,9 +9,9 @@ const pageInfo = document.getElementById('pageInfo');
 
 const ws = new WebSocket(`ws://localhost:8181`);
 
-const POKEMONS_PER_PAGE = 12; // 3 lignes de 3 Pokémon
+const POKEMONS_PER_PAGE = 12;
 let currentPage = 1;
-let allPokemon = []; // Stockage de tous les Pokémon
+let allPokemon = [];
 
 async function returnPkmn() {
     try {
@@ -46,21 +46,21 @@ async function fetchPokemonByName(name) {
 function updatePagination() {
     const totalPages = Math.ceil(allPokemon.length / POKEMONS_PER_PAGE);
     
-    // Mise à jour des boutons
+    // mise à jour des boutons
     prevPageButton.disabled = currentPage === 1;
     nextPageButton.disabled = currentPage === totalPages;
 
-    // Mise à jour du texte de pagination
+    // mise à jour du texte de pagination
     pageInfo.textContent = `Page ${currentPage} / ${totalPages}`;
 
-    // Affichage des Pokémon de la page actuelle
+    // affichage des Pokémon de la page actuelle
     const startIndex = (currentPage - 1) * POKEMONS_PER_PAGE;
     const endIndex = startIndex + POKEMONS_PER_PAGE;
     displayPokemon(allPokemon.slice(startIndex, endIndex));
 }
 
 function displayPokemon(pokemonList) {
-    pokemonListDiv.innerHTML = ''; // Vider la liste avant d'afficher les nouveaux résultats
+    pokemonListDiv.innerHTML = ''; // vider la liste avant d'afficher les nouveaux résultats
 
     pokemonList.forEach(pokemon => {
         const pokemonElement = document.createElement('div');
@@ -103,3 +103,35 @@ getAllButton.addEventListener('click', () => {
 });
 
 returnPkmn();
+
+/* RECHERCHE PAR TYPE */
+const pokemonTypeSelect = document.getElementById('pokemonType');
+
+async function fetchPokemonByType(type) {
+    try {
+        const response = await fetch(`http://localhost:3000/api/pkmn/search?typeOne=${type}`);
+
+        if (!response.ok) {
+            throw new Error('Aucun pokémon trouvé');
+        }
+
+        const pokemon = await response.json();
+        if (pokemon.data && pokemon.data.length > 0) {
+            displayPokemon(pokemon.data);  // afficher tous les Pokémon
+        } else {
+            throw new Error('Aucun Pokémon trouvé pour ce type.');
+        }
+    } catch (error) {
+        errorSearch.textContent = error.message;
+    }
+}
+
+pokemonTypeSelect.addEventListener('change', () => {
+    const selectedType = pokemonTypeSelect.value;
+    if (selectedType) {
+        fetchPokemonByType(selectedType);  // lance la recherche par type
+        errorSearch.textContent = '';  // réinitialiser le message d'erreur
+    } else {
+        errorSearch.textContent = 'Veuillez sélectionner un type de Pokémon.';
+    }
+});

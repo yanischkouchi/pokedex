@@ -4,7 +4,6 @@ const pkmnController = require('../controllers/pkmn.controller');
 const authMiddleware = require('../middlewares/auth.middleware');
 const permMiddleware = require('../middlewares/perm.middleware');
 
-// Route pour ajouter un Pokémon
 router.post('/pkmn', pkmnController.createPkmn);
 router.post('/pkmn/region', pkmnController.addRegionToPkmn);
 router.get('/pkmn/search', pkmnController.searchPkmn);

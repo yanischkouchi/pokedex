@@ -4,8 +4,7 @@ const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 
 exports.register = async (req, res) => {
-    let user;
-    let userData = structuredClone(req.body); // Pour éviter de modifier le body
+    let userData = structuredClone(req.body); // pour éviter de modifier le body
     try {
         let hash = await bcrypt.hash(userData.password, 10)
         userData.password = hash;      
@@ -27,7 +26,7 @@ exports.login = async (req, res) => {
         const uservice = new UserService;
         const isPasswordValid = await uservice.verifyPassword(password, user.password);
         if (!isPasswordValid) {
-            return res.status(401).json({ error: "Email/Mot de passe incorrect." });
+            return res.status(401).json({ error: "User/password not fond" });
         }
         const myToken = jwt.sign(
             { id: user._id, firstName: user.firstName, email: user.email, role: user.role },
@@ -37,7 +36,6 @@ exports.login = async (req, res) => {
         res.status(200).json({ id: user._id, firstName: user.firstName, token: myToken, role: user.role });
     
     } catch (err) {
-        console.log("erreur : ", err);
         res.status(400).send(err);
     }
 }

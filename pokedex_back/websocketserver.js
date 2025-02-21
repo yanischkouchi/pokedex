@@ -1,5 +1,4 @@
 const WebSocket = require('ws');
-// const jwt = require('jsonwebtoken'); 
 
 const wss = new WebSocket.Server({ port: 8181 });
 

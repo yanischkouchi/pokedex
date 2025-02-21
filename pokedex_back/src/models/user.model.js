@@ -31,8 +31,6 @@ userSchema.pre('save',function(next){
     if (this.lastName) {
         this.lastName = this.lastName.slice(0).toUpperCase();
     }
-    console.log('Fonction exec avant le save :');
-    console.log(this);
     next();
 })
 

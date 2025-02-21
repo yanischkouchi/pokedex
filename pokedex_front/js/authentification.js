@@ -47,8 +47,6 @@ loginForm.addEventListener('submit', async function(event) {
         alert('Connexion réussie !');
 
         modal.style.display = 'none';
-
-        // window.location.href = '/dashboard'; // exemple pour rediriger après connexion
     } catch (error) {
         errorAuth.textContent = error.message;
     }
@@ -63,24 +61,21 @@ const closeRegisterModal = document.getElementById('closeRegisterModal');
 const registerForm = document.getElementById('registerForm');
 const errorRegister = document.getElementById('errorRegister');
 
-// Ouvrir la modale d'inscription
 registerButton.addEventListener('click', () => {
     registerModal.style.display = 'block';
 });
 
-// Fermer la modale d'inscription
 closeRegisterModal.addEventListener('click', () => {
     registerModal.style.display = 'none';
 });
 
-// Fermer la modale en cliquant à l'extérieur
+// fermer la fenêtre modale lorsque l'utilisateur clique en dehors
 window.addEventListener('click', (event) => {
     if (event.target === registerModal) {
         registerModal.style.display = 'none';
     }
 });
 
-// Gestion du formulaire d'inscription
 registerForm.addEventListener('submit', async function (event) {
     event.preventDefault();
 

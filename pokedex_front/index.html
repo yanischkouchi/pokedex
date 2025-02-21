@@ -12,13 +12,13 @@
     <div id="registerModal" class="modal">
         <div class="modal-content">
             <span id="closeRegisterModal" class="close">&times;</span>
-            <h2>Inscription</h2>
+            <h2>S'inscrire</h2>
             <form id="registerForm">
                 <input type="text" id="lastName" placeholder="Nom" name="lastName" required />
                 <input type="text" id="firstName" placeholder="Prénom" name="firstName" required />
                 <input type="email" id="registerEmail" placeholder="Email" name="registerEmail" required />
                 <input type="password" id="registerPassword" placeholder="Mot de passe" name="registerPassword" required />
-                <button type="submit">S'inscrire</button>
+                <button type="submit">Inscription</button>
             </form>
             <p id="errorRegister" class="error-message"></p>
         </div>
@@ -41,6 +41,27 @@
     <div class="search-container">
         <input type="text" id="pokemonSearch" placeholder="Entrez le nom du Pokémon" />
         <button id="searchButton">Rechercher</button>
+        <select id="pokemonType">
+            <option value="">Type</option>
+            <option value="NORMAL">NORMAL 😐</option>
+            <option value="FEU">FEU 🔥</option>
+            <option value="EAU">EAU 💧</option>
+            <option value="PLANTE">PLANTE 🌿</option>
+            <option value="ÉLECTRIK">ÉLECTRIK ⚡</option>
+            <option value="GLACE">GLACE ❄️</option>
+            <option value="COMBAT">COMBAT 🥊</option>
+            <option value="POISON">POISON ☠️</option>
+            <option value="SOL">SOL 🌍</option>
+            <option value="VOL">VOL 🕊️</option>
+            <option value="PSY">PSY 🧠</option>
+            <option value="INSECTE">INSECTE 🐞</option>
+            <option value="ROCHE">ROCHE 🪨</option>
+            <option value="SPECTRE">SPECTRE 👻</option>
+            <option value="DRAGON">DRAGON 🐉</option>
+            <option value="TÉNÈBRES">TÉNÈBRES 🌑</option>
+            <option value="ACIER">ACIER ⚙️</option>
+            <option value="FÉE">FÉE 🧚‍♀️</option>
+        </select>
         <button id="getAllButton">Afficher tous les pokémons</button>
         <div id="errorSearch" class="error"></div>
     </div>

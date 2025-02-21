@@ -1,4 +1,3 @@
-const Pkmn = require('../models/pkmn.model');
 const PkmnModel = require('../models/pkmn.model');
 
 class PkmnService {
@@ -6,17 +5,19 @@ class PkmnService {
 
     async createPkmn(data) {
         try {
-            const newPkmn = new Pkmn(data);
+            data.types = formatTypes(data.types);
+            const newPkmn = new PkmnModel(data);
             await newPkmn.save();
             return newPkmn;
         } catch (err) {
+            console.error("Error during Pokémon creation :", err);
             throw new Error("Failed to create Pokémon");
         }
     }
 
     async addRegionToPkmn(pkmnId, regionName, regionPokedexNumber) {
         try {
-            const pkmn = await Pkmn.findById(pkmnId);
+            const pkmn = await PkmnModel.findById(pkmnId);
             if (!pkmn) {
                 throw new Error("Pokémon not found");
             }
@@ -55,11 +56,11 @@ class PkmnService {
             // page = page que l'on souhaite afficher, size = nombre d'éléments de cette page
             const skip = (page - 1) * size;
 
-            const pkmnList = await Pkmn.find(filter)
+            const pkmnList = await PkmnModel.find(filter)
                 .skip(skip)
                 .limit(size);
 
-            const totalCount = await Pkmn.countDocuments(filter);
+            const totalCount = await PkmnModel.countDocuments(filter);
 
             return {
                 data: pkmnList,
@@ -92,7 +93,7 @@ class PkmnService {
 
     async getAllPkmn() {
         try {
-            return await Pkmn.find(); // Récupère tous les Pokémon
+            return await PkmnModel.find(); // récupère tous les Pokémon
         } catch (error) {
             console.error("Error fetching all Pokémon:", error);
             throw error;
@@ -160,3 +161,29 @@ class PkmnService {
 }
 
 module.exports = PkmnService;
+
+// pour pouvoir insérer les données dans la bdd lors du lancement du script
+const typeTranslations = {
+    fire: "FEU",
+    water: "EAU",
+    grass: "PLANTE",
+    electric: "ÉLECTRIK",
+    ice: "GLACE",
+    fighting: "COMBAT",
+    poison: "POISON",
+    ground: "SOL",
+    flying: "VOL",
+    psychic: "PSY",
+    bug: "INSECTE",
+    rock: "ROCHE",
+    ghost: "SPECTRE",
+    dragon: "DRAGON",
+    dark: "TÉNÈBRES",
+    steel: "ACIER",
+    fairy: "FÉE",
+    normal: "NORMAL",
+};
+
+function formatTypes(types) {
+    return types.map(type => typeTranslations[type.toLowerCase()] || type.toUpperCase());
+}

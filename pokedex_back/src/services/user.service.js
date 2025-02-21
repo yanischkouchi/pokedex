@@ -5,7 +5,7 @@ class UserService {
     constructor() {        
     }
 
-    // Récupérer un User par son ID
+    // Rrécupérer un User par son ID
     getUserById(id) {
         if(!id) {
             throw new Error("id not found");
@@ -16,7 +16,7 @@ class UserService {
         }
     }
 
-    // Récupérer un User par son Email
+    // récupérer un User par son Email
     getUserByEmail(userEmail) {
         if (!userEmail) {
             throw new Error("email not found");
@@ -25,7 +25,7 @@ class UserService {
         }
     }
 
-    // Mettre à jour un User par son ID
+    // mettre à jour un User par son ID
     updateUserById(id, updateData) {
         if(!id) {
             throw new Error("id not found");
@@ -34,7 +34,7 @@ class UserService {
         }
     }
 
-    // Supprimer un User par son ID
+    // supprimer un User par son ID
     deleteUserById(id) {
         if(!id) {
             throw new Error("id not found");
@@ -47,7 +47,7 @@ class UserService {
         try {
             return bcrypt.compare(password, hash);
         } catch (error) {
-            console.error("Erreur lors de la vérification du mot de passe :", error);
+            console.error("Error during password verification :", error);
             return false;
         }
     }

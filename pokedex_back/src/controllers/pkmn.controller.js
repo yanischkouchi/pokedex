@@ -15,18 +15,19 @@ exports.createPkmn = async (req, res) => {
             return res.status(400).json({ error: "Missing required fields", received: req.body });
         }
 
-        // Vérification si types est bien un tableau
+        // vérification si types est bien un tableau
         const formattedTypes = Array.isArray(types) ? types : types.split(',');
 
         const pkmnService = new PkmnService();
         const newPkmn = await pkmnService.createPkmn({ 
             name, 
-            types: formattedTypes, // Utilisation du tableau correct
+            types: formattedTypes, // utilisation du tableau correct
             description,
             imgUrl 
         });
         res.status(201).json(newPkmn);
     } catch (err) {
+        console.log("erreur : ", err)
         res.status(500).json({ error: "Failed to create Pokémon", details: err.message });
     }
 };

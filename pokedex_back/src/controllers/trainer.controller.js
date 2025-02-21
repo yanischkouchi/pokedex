@@ -3,7 +3,6 @@ const Pkmn = require('../models/pkmn.model');
 const Trainer = require('../models/trainer.model');
 
 exports.createTrainer = async (req, res) => {
-    console.log("req.user : ", req.user)
     try {
         const { trainerName, imgUrl } = req.body;
         const username = req.user.firstName;
@@ -17,8 +16,7 @@ exports.createTrainer = async (req, res) => {
 
 exports.getTrainer = async (req, res) => {
     try {
-        console.log("username : ", req.user.firstName)
-        const username = req.user.firstName; // Utilise directement le username de req.user
+        const username = req.user.firstName;
         
         const trainer = await TrainerService.getTrainer(username);
 
