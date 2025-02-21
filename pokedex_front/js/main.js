@@ -29,14 +29,15 @@ async function returnPkmn() {
 async function fetchPokemonByName(name) {
     try {
         const formattedName = name.charAt(0).toUpperCase() + name.slice(1).toLowerCase();
-        const response = await fetch(`http://localhost:3000/api/pkmn?name=${formattedName}`);
+        const response = await fetch(`http://localhost:3000/api/pkmn/search?partialName=${formattedName}`);
 
         if (!response.ok) {
             throw new Error('Pokémon non trouvé');
         }
 
         const pokemon = await response.json();
-        displayPokemon([pokemon]);        
+        console.log([pokemon.data[0]])
+        displayPokemon([pokemon.data[0]]);        
     } catch (error) {
         errorSearch.textContent = error.message;
     }
