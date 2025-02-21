@@ -5,10 +5,10 @@
 
 body {
     background-image: url(../assets/background_pc.jpg);
-    background-size: cover; /* L'image couvre toute la page */
-    background-repeat: no-repeat; /* Empêche la répétition de l'image */
-    background-position: center; /* Centre l'image */
-    background-attachment: fixed; /* Garde l'image fixe au défilement */
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-attachment: fixed;
 }
 
 h1 {
@@ -20,7 +20,7 @@ h2 {
     text-align: center;
 }
 
-/*                      FENETRE CONNEXION                      */
+/* CONNEXION */
 
 #loginButton {
     background: #fbca1f;
@@ -47,7 +47,6 @@ transform: translate(0.05em, 0.05em);
 box-shadow: 0.05em 0.05em;
 }
 
-/* Fenêtre modale */
 .modal {
     display: none;
     position: fixed;
@@ -60,7 +59,6 @@ box-shadow: 0.05em 0.05em;
     background-color: rgba(0, 0, 0, 0.4);
 }
 
-/* Contenu de la modale */
 .modal-content {
     background-color: #fff;
     margin: 15% auto;
@@ -87,7 +85,6 @@ box-shadow: 0.05em 0.05em;
     margin-bottom: 2vh;
 }
 
-/* Bouton de fermeture */
 .close {
     color: #aaa;
     font-size: 28px;
@@ -103,7 +100,51 @@ box-shadow: 0.05em 0.05em;
     cursor: pointer;
 }
 
-/*                    AFFICHAGE POKEMON                      */
+/* INSCRIPTION */
+
+#registerButton {
+    background: #fbca1f;
+    font-family: inherit;
+    padding: 0.6em 1.3em;
+    font-weight: 900;
+    font-size: 2vh;
+    border: 3px solid black;
+    border-radius: 0.4em;
+    box-shadow: 0.1em 0.1em;
+    cursor: pointer;
+    margin: 1vh;
+    justify-self: center;
+
+}
+
+#registerButton:hover {
+transform: translate(-0.05em, -0.05em);
+box-shadow: 0.15em 0.15em;
+}
+
+#registerButton:active {
+transform: translate(0.05em, 0.05em);
+box-shadow: 0.05em 0.05em;
+}
+
+#registerForm {
+    display: grid;
+    justify-content: center;
+}
+
+#registerForm>label {
+    margin-bottom: 1vh;
+}
+
+#registerForm>input {
+    margin-bottom: 2vh;
+}
+
+#registerForm>button {
+    margin-bottom: 2vh;
+}
+
+/* AFFICHAGE POKEMON */
 .search-container {
     display: grid;
     align-items: center;
@@ -184,7 +225,6 @@ box-shadow: 0.05em 0.05em;
     text-align: center;
 }
 
-/* Liste des Pokémon */
 .pokemon-list {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
@@ -193,7 +233,6 @@ box-shadow: 0.05em 0.05em;
     padding: 20px;
 }
 
-/* Carte de chaque Pokémon */
 .pokemon {
     border: 1px solid #ddd;
     border-radius: 8px;
@@ -207,15 +246,15 @@ box-shadow: 0.05em 0.05em;
 
 .pokemon:hover {
     opacity: 100%;
-    transform: scale(1.04);
+    transform: scale(1.02);
 }
 
 .pokemon img {
-    width: 100px; /* Taille réduite de l'image */
-    height: 100px;
-    object-fit: cover;
+    width: 10vw;
+    height: 15vh;
+    object-fit: contain;
     opacity: 100%;
-    margin-bottom: 10px;
+    margin-bottom: 1vh;
 }
 
 .pokemon h3 {
